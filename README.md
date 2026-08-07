@@ -1,37 +1,39 @@
 # codebase-baseline-planner
 
-> **中文**：代码库认知基线、持久化记忆与二次开发规划技能。在修改、DIY、重构、迁移、接手维护或继续实现已有代码库之前，建立并持续维护可追溯的「项目认知基线与交接记忆」。
+> **中文**：原项目分析、盲区发现与二次开发协作技能。在修改、DIY、重构、迁移、接手维护或继续实现已有代码库之前，先独立还原原项目、系统发现盲区与未知，经确认后形成融合的二次开发方案；同时把关键认知与决策写回项目内，方便后续交接。
 >
-> **English**: An AI skill that builds and continuously maintains a traceable *project cognition baseline & handoff memory* before you modify, refactor, migrate, take over, or keep building on an existing codebase.
+> **English**: An AI skill for *independent codebase analysis, blind-spot discovery, and collaborative secondary-development planning*. Before modifying, refactoring, migrating, taking over, or building on an existing codebase, it first restores the original project, surfaces blind spots and unknowns, and — after your confirmation — produces a fused secondary-development plan. Key knowledge and decisions are written back into the project for handoff.
 
 ---
 
 ## 它是什么 / What is this?
 
-在让 AI 动手改代码之前，这个技能会先帮你在项目里建立一份「给 AI 自己看的项目档案」：代码库是什么、关键模块怎么运作、做过什么决定、改到哪一步了。这份档案存放在项目内部（如 `docs/ai-project/`），这样**任何 AI 对话或 Agent 以后都能快速接手**，不用从头再读一遍整个代码库。
+在让 AI 动手改代码之前，这个技能会先**独立还原原项目**：把代码库是什么、关键模块怎么运作、有哪些隐含约定和限制风险，整理成一份可交给任何 AI Agent 或开发者阅读的**原项目认知基线**。然后系统性**发现盲区与未知**——哪些地方证据不足、哪些假设有风险、历史上踩过什么坑。之后再与你**讨论并确认二次开发方向**，最后才生成融合的改造方案。关键认知与决策会写回项目内，方便任何 AI 对话或 Agent 后续接手。
 
-Before letting an AI touch your code, this skill establishes a *project memory* inside the repository — what the codebase is, how key modules work, which decisions were made, and how far an implementation has gotten. Because the memory lives **inside the project** (`docs/ai-project/`), any future AI session or agent can pick up where the last one left off without re-reading the whole codebase.
+Before letting an AI touch your code, this skill first *independently restores the original project* — turning what the codebase does, how its key modules work, its implicit conventions, constraints, and risks into a **cognition baseline** any AI agent or developer can pick up. It then systematically *surfaces blind spots and unknowns*: where evidence is thin, which assumptions are risky, and what historical pitfalls exist. Only after discussing and confirming the *secondary-development direction* with you does it produce a fused plan. Key knowledge and decisions are written back into the project so any future AI session or agent can take over.
 
 **设计原则 / Design principles**
 
-- 先恢复已有记忆，再扫描代码（restore memory before scanning code）
-- 先核对版本，再信任文档（verify the revision before trusting the docs）
+- 先独立还原原项目，再讨论你的改造想法（restore the original project before discussing your ideas）
+- 清单只保证最低覆盖，不是思考边界（checklists set the floor, never the ceiling）
 - 证据优先，区分事实 / 推断 / 反馈 / 未知（evidence first — separate facts, inferences, feedback, and unknowns）
-- 先还原原项目，再讨论你的改造想法（understand the original project before fusing your ideas）
+- 主动发现盲区与未知，不放过关键缺口（actively surface blind spots and unknowns）
+- 保持独立判断，必要时纠正你的认知（keep independent judgment; correct misconceptions when needed）
 - 未经确认不生成最终方案、不改代码（no final plan or code changes without confirmation）
-- 把状态写回项目，不依赖聊天记录（write state back into the project, never rely on chat logs）
+- 关键认知与决策写回项目，便于交接（write key knowledge and decisions back into the project for handoff）
 
 ## 功能 / Features
 
 | 中文 | English |
 |---|---|
-| 项目记忆恢复与新鲜度判断 | Restore project memory and judge whether it is still fresh |
-| 增量复查，避免重复全量扫描 | Incremental review instead of repeated full rescans |
+| 独立还原原项目，形成认知基线 | Independently restore the original project into a cognition baseline |
+| 盲区发现：证据扫描 / 盲区检查 / 反向失败推演 / 范围外检查 | Blind-spot discovery: evidence scan, blind-spot check, reverse-failure reasoning, out-of-scope check |
+| 保持独立判断，必要时纠正你的认知 | Keep independent judgment and correct misconceptions |
+| 提交基线，讨论并确认二次开发方向 | Submit the baseline, discuss and confirm the direction |
+| 融合的二次开发方案 | Fused secondary-development plan (`FUSION_PLAN.md`) |
 | 决策记录（DEC-xxx） | Decision log (`DEC-xxx`) |
-| 融合方案（FUSION_PLAN） | Fusion plan (`FUSION_PLAN.md`) |
-| 实施状态跟踪（IMP-xxx） | Implementation status tracking (`IMP-xxx`) |
-| 交接文档，新对话无缝接手 | Handoff docs so a new session can take over seamlessly |
 | 防「清单锁死」的开放式复查 | Open-ended review to prevent "checklist lock-in" |
+| 辅助：关键状态写回项目，新会话可接手 | Auxiliary: write key state back into the project for handoff |
 
 ## 安装 / Installation
 
@@ -78,6 +80,10 @@ Once installed there is no manual invocation — just describe your task. The sk
 阶段 7   实施并持续更新交接状态       Implement & keep handoff status fresh
 ```
 
+> 注：恢复项目记忆（阶段 -1）与写回状态（阶段 7）属于**辅助交接能力**，用于跨会话复用；技能主体是分析、盲区发现与协作规划。
+>
+> Note: restoring project memory (Phase −1) and writing state back (Phase 7) are *auxiliary handoff capabilities*; the core of the skill is analysis, blind-spot discovery, and collaborative planning.
+
 ### 配套脚本 / Helper script
 
 需要一个可选的 Python 3 环境（用于初始化和检查项目记忆结构）：
@@ -111,7 +117,7 @@ codebase-baseline-planner/
 └── README.md
 ```
 
-在目标项目里，它会建立如下记忆结构（可自定义）：
+在目标项目里，它还会建立如下**辅助交接**结构（可自定义）：
 
 Inside the target project it scaffolds this memory layout (customizable):
 
