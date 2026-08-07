@@ -1,0 +1,12 @@
+interface:
+  display_name: "代码库认知基线与项目记忆"
+  short_description: "复用项目内基线与进度，增量核对代码，再记录决策、融合方案及交接状态。"
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
